@@ -118,6 +118,7 @@ class AddRecords(Frame):
             fg=self.col_fg, bd=0,
             width=13,
             font="Montserrat 15",
+            show="\u2022",
             justify='left',
             textvariable=self.password_String
         )
@@ -141,6 +142,7 @@ class AddRecords(Frame):
             fg=self.col_fg, bd=0,
             width=13,
             font="Montserrat 15",
+            show="\u2022",
             justify='left',
             textvariable=self.confirm_String
         )
@@ -157,10 +159,10 @@ class AddRecords(Frame):
             fg=self.col_fg,
             activebackground=self.col_btn_clicked,
             activeforeground=self.col_fg,
-            # command = showEntry,
+            # command = self.add_Event,
         )
         add_Btn.place(relx=0.23, rely=0.8, anchor='n')
-
+        
     def close(self):
         for frame in self.frame_list:
             frame.destroy()

@@ -5,6 +5,7 @@ from Framework.api.records_manager import *
 from _viewRecords import ViewRecords
 from _addRecords import AddRecords
 
+
 class Nav_Frame(Frame):
     def __init__(self, parent):
         self._master = parent
