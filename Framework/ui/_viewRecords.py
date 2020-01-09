@@ -124,8 +124,6 @@ class ViewRecords(Frame):
         )
         view_Btn.place(relx=0.8, rely=0.15, anchor='n')
 
-        pass
-
     def close(self):
         for frame in self.frame_list:
             frame.destroy()

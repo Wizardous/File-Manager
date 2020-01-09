@@ -39,6 +39,7 @@ class Nav_Frame(Frame):
 
 
         self.current_page = ViewRecords(self.pageFrame)
+        self.change_page(AddRecords)
 
     def change_page(self, class_name):
         if class_name.__name__ != type(self.current_page).__name__:
