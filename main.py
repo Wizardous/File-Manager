@@ -2,8 +2,8 @@ from tkinter import *
 import tkinter as tk
 from threading import Thread
 
-from api.login import Login
-from ui.login import Login_form
+from Framework.api.login_api import Login
+from Framework.ui.login import Login_form
 
 
 def main():
