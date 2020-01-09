@@ -26,20 +26,36 @@ class Nav_Frame(Frame):
         self.btn_default = "#36364d"
 
         self.col_pageFrame_bg = "#3f3f5a"
-        self.col_navBtn_default_bg = "#35354b" 
+        self.col_tab_default_bg = "#34344b"
+        self.col_activeTab_fg = '#4dffa3'
 
         self._master.title("Navigation Page")
         self._master.geometry("{}x{}+{}+{}".format(self.width, self.height, x, y))
         self._master.resizable(False, False)
 
+        self.button_dict = {}
+
         self.initUI()
+
 
         self.current_page = ViewRecords(self.pageFrame)
 
     def change_page(self, class_name):
-        self.current_page.close()
-        del self.current_page
-        self.current_page = class_name(self.pageFrame)
+        if class_name.__name__ != type(self.current_page).__name__:
+            self.current_page.close()
+            del self.current_page
+            self.current_page = class_name(self.pageFrame)
+
+            current_class = class_name.__name__
+            for c in self.button_dict:
+                if c != current_class:
+                    self.button_dict[c]['bg'] = self.col_tab_default_bg
+                    self.button_dict[c]['fg'] = self.col_fg
+                else:
+                    self.button_dict[c]['bg'] = self.col_pageFrame_bg
+                    self.button_dict[c]['fg'] = self.col_activeTab_fg
+
+
 
 
     def initUI(self):
@@ -57,8 +73,8 @@ class Nav_Frame(Frame):
 
         self.navBtn_View = Button(self.navFrame,
                                   text = 'View Records',
-                                  bg = self.col_navBtn_default_bg,
-                                  fg = self.col_fg,
+                                  bg = self.col_pageFrame_bg,
+                                  fg = self.col_activeTab_fg,
                                   activebackground = self.btn_clicked,
                                   activeforeground = self.col_fg,
                                   width = 20,
@@ -67,27 +83,29 @@ class Nav_Frame(Frame):
                                   anchor = 'w',
                                   bd = 0,
                                   command = lambda : self.change_page(ViewRecords)
-                                )
+                                  )
         self.navBtn_View.place(relx=0.3, rely=0.1, anchor='w')
+        self.button_dict['ViewRecords'] = self.navBtn_View
 
         self.navBtn_Add = Button(self.navFrame,
-                                  text = 'Add',
-                                  bg = self.col_navBtn_default_bg,
-                                  fg = self.col_fg,
-                                  activebackground = self.btn_clicked,
-                                  activeforeground = self.col_fg,
-                                  width = 20,
-                                  font = "Montserrat 12",
-                                  justify= 'left',
-                                  anchor = 'w',
-                                  bd = 0,
+                                 text = 'Add',
+                                 bg = self.col_tab_default_bg,
+                                 fg = self.col_fg,
+                                 activebackground = self.btn_clicked,
+                                 activeforeground = self.col_fg,
+                                 width = 20,
+                                 font = "Montserrat 12",
+                                 justify= 'left',
+                                 anchor = 'w',
+                                 bd = 0,
                                  command=lambda: self.change_page(AddRecords)
-                                )
+                                 )
         self.navBtn_Add.place(relx=0.3, rely=0.22, anchor='w')
+        self.button_dict['AddRecords'] = self.navBtn_Add
 
         self.navBtn_View = Button(self.navFrame,
                                   text = 'Update',
-                                  bg = self.col_navBtn_default_bg,
+                                  bg = self.col_tab_default_bg,
                                   fg = self.col_fg,
                                   activebackground = self.btn_clicked,
                                   activeforeground = self.col_fg,
@@ -96,12 +114,12 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
-                                )
+                                  )
         self.navBtn_View.place(relx=0.3, rely=0.34, anchor='w')
 
         self.navBtn_View = Button(self.navFrame,
                                   text = 'Delete',
-                                  bg = self.col_navBtn_default_bg,
+                                  bg = self.col_tab_default_bg,
                                   fg = self.col_fg,
                                   activebackground = self.btn_clicked,
                                   activeforeground = self.col_fg,
@@ -110,12 +128,12 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
-                                )
+                                  )
         self.navBtn_View.place(relx=0.3, rely=0.46, anchor='w')
 
         self.navBtn_View = Button(self.navFrame,
                                   text = 'Search Records',
-                                  bg = self.col_navBtn_default_bg,
+                                  bg = self.col_tab_default_bg,
                                   fg = self.col_fg,
                                   activebackground = self.btn_clicked,
                                   activeforeground = self.col_fg,
@@ -124,21 +142,21 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
-                                )
+                                  )
         self.navBtn_View.place(relx=0.3, rely=0.58, anchor='w')
 
         self.navBtn_View = Button(self.navFrame,
                                   text = 'Logout',
-                                  bg = self.col_navBtn_default_bg,
-                                  fg = '#00cc99', #self.col_fg,
+                                  bg = self.col_tab_default_bg,
+                                  fg = '#00cc99',  #self.col_fg,
                                   activebackground = self.btn_clicked,
-                                  activeforeground = '#00cc99', #self.col_fg,
+                                  activeforeground = '#00cc99',  #self.col_fg,
                                   width = 20,
                                   font = "Montserrat 12",
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
-                                )
+                                  )
         self.navBtn_View.place(relx=0.3, rely=0.9, anchor='w')
 
 

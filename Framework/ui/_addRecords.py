@@ -12,6 +12,3 @@ class AddRecords(Frame):
         widget_list = [self.label]
         for widget in widget_list:
             widget.destroy()
-
-    def __del__(self):
-        print("Add Frame Ended")
