@@ -1,5 +1,5 @@
 from tkinter import *
-from threading import Thread
+
 
 class AddRecords(Frame):
     def __init__(self, parent_frame):
@@ -162,7 +162,7 @@ class AddRecords(Frame):
             # command = self.add_Event,
         )
         add_Btn.place(relx=0.23, rely=0.8, anchor='n')
-        
+
     def close(self):
         for frame in self.frame_list:
             frame.destroy()

@@ -4,7 +4,7 @@ from Framework.api.records_manager import *
 
 from _viewRecords import ViewRecords
 from _addRecords import AddRecords
-
+from  _deleteRecords import DeleteRecords
 
 class Nav_Frame(Frame):
     def __init__(self, parent):
@@ -40,7 +40,7 @@ class Nav_Frame(Frame):
 
 
         self.current_page = ViewRecords(self.pageFrame)
-        self.change_page(AddRecords)
+        self.change_page(DeleteRecords)
 
     def change_page(self, class_name):
         if class_name.__name__ != type(self.current_page).__name__:
@@ -56,8 +56,6 @@ class Nav_Frame(Frame):
                 else:
                     self.button_dict[c]['bg'] = self.col_pageFrame_bg
                     self.button_dict[c]['fg'] = self.col_activeTab_fg
-
-
 
 
     def initUI(self):
@@ -105,7 +103,7 @@ class Nav_Frame(Frame):
         self.navBtn_Add.place(relx=0.3, rely=0.22, anchor='w')
         self.button_dict['AddRecords'] = self.navBtn_Add
 
-        self.navBtn_View = Button(self.navFrame,
+        self.navBtn_Update = Button(self.navFrame,
                                   text = 'Update',
                                   bg = self.col_tab_default_bg,
                                   fg = self.col_fg,
@@ -117,9 +115,9 @@ class Nav_Frame(Frame):
                                   anchor = 'w',
                                   bd = 0,
                                   )
-        self.navBtn_View.place(relx=0.3, rely=0.34, anchor='w')
+        self.navBtn_Update.place(relx=0.3, rely=0.34, anchor='w')
 
-        self.navBtn_View = Button(self.navFrame,
+        self.navBtn_Delete = Button(self.navFrame,
                                   text = 'Delete',
                                   bg = self.col_tab_default_bg,
                                   fg = self.col_fg,
@@ -130,10 +128,12 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
+                                  command=lambda: self.change_page(DeleteRecords)
                                   )
-        self.navBtn_View.place(relx=0.3, rely=0.46, anchor='w')
+        self.navBtn_Delete.place(relx=0.3, rely=0.46, anchor='w')
+        self.button_dict['DeleteRecords'] = self.navBtn_Delete
 
-        self.navBtn_View = Button(self.navFrame,
+        self.navBtn_Search = Button(self.navFrame,
                                   text = 'Search Records',
                                   bg = self.col_tab_default_bg,
                                   fg = self.col_fg,
@@ -145,9 +145,9 @@ class Nav_Frame(Frame):
                                   anchor = 'w',
                                   bd = 0,
                                   )
-        self.navBtn_View.place(relx=0.3, rely=0.58, anchor='w')
+        self.navBtn_Search.place(relx=0.3, rely=0.58, anchor='w')
 
-        self.navBtn_View = Button(self.navFrame,
+        self.navBtn_Logout = Button(self.navFrame,
                                   text = 'Logout',
                                   bg = self.col_tab_default_bg,
                                   fg = '#00cc99',  #self.col_fg,
@@ -159,7 +159,7 @@ class Nav_Frame(Frame):
                                   anchor = 'w',
                                   bd = 0,
                                   )
-        self.navBtn_View.place(relx=0.3, rely=0.9, anchor='w')
+        self.navBtn_Logout.place(relx=0.3, rely=0.9, anchor='w')
 
 
 def main():
