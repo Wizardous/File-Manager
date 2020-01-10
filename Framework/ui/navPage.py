@@ -2,9 +2,9 @@ from tkinter import *
 from threading import Thread
 from Framework.api.records_manager import *
 
-from _viewRecords import ViewRecords
-from _addRecords import AddRecords
-from  _deleteRecords import DeleteRecords
+from Framework.ui._viewRecords import ViewRecords
+from Framework.ui._addRecords import AddRecords
+from Framework.ui._deleteRecords import DeleteRecords
 
 class Nav_Frame(Frame):
     def __init__(self, parent):
@@ -158,8 +158,13 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
+                                  command = self.logoutEvent
                                   )
         self.navBtn_Logout.place(relx=0.3, rely=0.9, anchor='w')
+
+    def logoutEvent(self):
+
+        pass
 
 
 def main():

@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 from threading import Thread
 
-# from .navPage import Nav_Frame
+from Framework.ui.navPage import Nav_Frame
 
 class Login_form(Frame):
     def __init__(self, parent, api_obj):
@@ -30,7 +30,7 @@ class Login_form(Frame):
         self.__auth_running = False
 
         self.__login_api = api_obj
-
+        self.frame_List = []
         self.initUI()
         
     
@@ -41,6 +41,7 @@ class Login_form(Frame):
                                 width = self.width
                                 )
         self.img_frame.pack()
+        self.frame_List.append(self.img_frame)
 
         self.label1 = Label(self.img_frame, text="{LogIn}",
                             bg = self.col_bg,
@@ -55,6 +56,7 @@ class Login_form(Frame):
                                 width = self.width
                                 )
         self.login_frame.pack()
+        self.frame_List.append(self.login_frame)
 
         self.username_string = StringVar()
         self.password_string = StringVar()
@@ -133,9 +135,12 @@ class Login_form(Frame):
         
         if result:
             print("success")
-            # # main_window = Nav_Frame(self._master)
-            # self.destroy()
-    
+            self.close_ui()
+            main_window = Nav_Frame(self._master)
+
+    def close_ui(self):
+        for frame in self.frame_List:
+            frame.destroy()
 
 def main():
     root = tk.Tk()
