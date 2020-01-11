@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11f32bfe-419f-471b-8a28-08de5d1103ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Framework/ui/_handlers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/ui/_logout.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/ui/_searchRecords.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/ui/_deleteRecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/ui/_deleteRecords.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Framework/ui/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/ui/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Framework/ui/navPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/ui/navPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +41,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.navPage">
     <configuration name="login" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="File-Manager" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -49,7 +54,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Framework/ui/login.py" />
+      <option name="SCRIPT_NAME" value="E:\Python\File-Manager\Framework\ui\login.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -102,9 +107,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.login" />
         <item itemvalue="Python.navPage" />
+        <item itemvalue="Python.login2" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -134,22 +139,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1515" height="61" key="GridCell.Tab.0.bottom" timestamp="1578677606778">
+    <state width="1515" height="153" key="GridCell.Tab.0.bottom" timestamp="1578746093181">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="61" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578677606778" />
-    <state width="1515" height="61" key="GridCell.Tab.0.center" timestamp="1578677606778">
+    <state width="1515" height="153" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578746093181" />
+    <state width="1515" height="153" key="GridCell.Tab.0.center" timestamp="1578746093181">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="61" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578677606778" />
-    <state width="1515" height="61" key="GridCell.Tab.0.left" timestamp="1578677606777">
+    <state width="1515" height="153" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578746093181" />
+    <state width="1515" height="153" key="GridCell.Tab.0.left" timestamp="1578746093180">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="61" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578677606777" />
-    <state width="1515" height="61" key="GridCell.Tab.0.right" timestamp="1578677606778">
+    <state width="1515" height="153" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578746093180" />
+    <state width="1515" height="153" key="GridCell.Tab.0.right" timestamp="1578746093181">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="61" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578677606778" />
+    <state width="1515" height="153" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578746093181" />
     <state width="1515" height="2" key="GridCell.Tab.1.bottom" timestamp="1578610248541">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -178,15 +183,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="457" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578644868756" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Framework/ui/login.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1578685636918">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1578685636918" />
   </component>
 </project>

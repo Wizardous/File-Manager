@@ -3,9 +3,12 @@ import tkinter as tk
 from threading import Thread
 
 from Framework.ui.navPage import Nav_Frame
+from Framework.api.login_api import Login
+import Framework.ui._handlers as handle
+
 
 class Login_form(Frame):
-    def __init__(self, parent, api_obj):
+    def __init__(self, parent):
         self._master = parent
         super().__init__(self._master)
 
@@ -29,7 +32,7 @@ class Login_form(Frame):
         self._master.resizable(False, False)
         self.__auth_running = False
 
-        self.__login_api = api_obj
+        self.__login_api = Login()
         self.frame_List = []
         self.initUI()
         
@@ -125,6 +128,7 @@ class Login_form(Frame):
 
     def try_login(self):
         if not self.__auth_running:
+            print("Trying Authentication...")
             self.__auth_running = True
             auth = Thread(target=self.__auth)
             auth.start()
@@ -136,18 +140,22 @@ class Login_form(Frame):
         if result:
             print("success")
             self.close_ui()
-            main_window = Nav_Frame(self._master)
+            handle.navigation_page = Nav_Frame(self._master)
+        else :
+            print("Failed")
 
     def close_ui(self):
         for frame in self.frame_List:
             frame.destroy()
 
-def main():
-    root = tk.Tk()
-    
-    login = Login_form(root)
 
-    root.mainloop()
+
+def main():
+    handle.root = tk.Tk()
+    
+    handle.login_frame = Login_form(handle.root)
+
+    handle.root.mainloop()
 
 
 if __name__ == "__main__":

@@ -5,6 +5,9 @@ from Framework.api.records_manager import *
 from Framework.ui._viewRecords import ViewRecords
 from Framework.ui._addRecords import AddRecords
 from Framework.ui._deleteRecords import DeleteRecords
+from Framework.ui._logout import Logout
+import  Framework.ui._handlers as handle
+
 
 class Nav_Frame(Frame):
     def __init__(self, parent):
@@ -40,7 +43,7 @@ class Nav_Frame(Frame):
 
 
         self.current_page = ViewRecords(self.pageFrame)
-        self.change_page(DeleteRecords)
+        self.change_page(ViewRecords)
 
     def change_page(self, class_name):
         if class_name.__name__ != type(self.current_page).__name__:
@@ -147,8 +150,8 @@ class Nav_Frame(Frame):
                                   )
         self.navBtn_Search.place(relx=0.3, rely=0.58, anchor='w')
 
-        self.navBtn_Logout = Button(self.navFrame,
-                                  text = 'Logout',
+        self.navBtn_Exit = Button(self.navFrame,
+                                  text = 'Exit',
                                   bg = self.col_tab_default_bg,
                                   fg = '#00cc99',  #self.col_fg,
                                   activebackground = self.btn_clicked,
@@ -158,21 +161,18 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
-                                  command = self.logoutEvent
+                                  command=lambda: self.change_page(Logout)
                                   )
-        self.navBtn_Logout.place(relx=0.3, rely=0.9, anchor='w')
-
-    def logoutEvent(self):
-
-        pass
+        self.navBtn_Exit.place(relx=0.3, rely=0.9, anchor='w')
+        self.button_dict['Logout'] = self.navBtn_Exit
 
 
 def main():
-    root = Tk()
+    handle.root = Tk()
 
-    nav_frame = Nav_Frame(root)
+    handle.navigation_page = Nav_Frame(handle.root)
 
-    root.mainloop()
+    handle.root.mainloop()
 
 if __name__ == "__main__":
     main()

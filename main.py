@@ -1,16 +1,13 @@
 from tkinter import *
 import tkinter as tk
-from threading import Thread
+import Framework.ui._handlers as handle
 
-from Framework.api.login_api import Login
 from Framework.ui.login import Login_form
 
-
 def main():
-    login_obj = Login()
-    root = tk.Tk()
-    login_frame = Login_form(root, login_obj)
-    root.mainloop()
+    handle.root = tk.Tk()
+    handle.login_frame = Login_form(handle.root)
+    handle.root.mainloop()
     pass
 
 if __name__ == "__main__":

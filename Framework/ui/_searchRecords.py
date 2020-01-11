@@ -1,7 +1,8 @@
 from tkinter import *
+from Framework.ui.login import Login_form
 
 
-class DeleteRecords(Frame):
+class SearchRecords(Frame):
     def __init__(self, parent_frame):
         self._master = parent_frame
         super().__init__(self._master)
@@ -34,7 +35,7 @@ class DeleteRecords(Frame):
 
         self.title_lbl = Label(
             self.title_Frame,
-            text="Recycle",
+            text="Find",
             anchor='w',
             font=("Montserrat", 30),
             width=15,
@@ -55,7 +56,7 @@ class DeleteRecords(Frame):
 
         question_Label = Label(
             self.input_Frame,
-            text="Deleting the record using :",
+            text="Searching the record using :",
             anchor='w',
             font=("Montserrat", 13),
             width=25,
@@ -140,7 +141,7 @@ class DeleteRecords(Frame):
     def changeLabel(self):
         self.fieldVar.set(f"Enter the {self.radio_Var.get()} :")
 
+
     def close(self):
         for frame in self.frame_list:
             frame.destroy()
-
