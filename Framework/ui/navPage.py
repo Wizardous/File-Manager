@@ -4,6 +4,7 @@ from Framework.api.records_manager import *
 
 from Framework.ui._viewRecords import ViewRecords
 from Framework.ui._addRecords import AddRecords
+from Framework.ui._updateRecords import UpdateRecords
 from Framework.ui._deleteRecords import DeleteRecords
 from Framework.ui._logout import Logout
 import  Framework.ui._handlers as handle
@@ -41,9 +42,8 @@ class Nav_Frame(Frame):
 
         self.initUI()
 
-
         self.current_page = ViewRecords(self.pageFrame)
-        self.change_page(ViewRecords)
+        self.change_page(UpdateRecords)
 
     def change_page(self, class_name):
         if class_name.__name__ != type(self.current_page).__name__:
@@ -117,8 +117,10 @@ class Nav_Frame(Frame):
                                   justify= 'left',
                                   anchor = 'w',
                                   bd = 0,
+                                  command=lambda: self.change_page(UpdateRecords)
                                   )
         self.navBtn_Update.place(relx=0.3, rely=0.34, anchor='w')
+        self.button_dict['UpdateRecords'] = self.navBtn_Update
 
         self.navBtn_Delete = Button(self.navFrame,
                                   text = 'Delete',
@@ -135,20 +137,6 @@ class Nav_Frame(Frame):
                                   )
         self.navBtn_Delete.place(relx=0.3, rely=0.46, anchor='w')
         self.button_dict['DeleteRecords'] = self.navBtn_Delete
-
-        self.navBtn_Search = Button(self.navFrame,
-                                  text = 'Search Records',
-                                  bg = self.col_tab_default_bg,
-                                  fg = self.col_fg,
-                                  activebackground = self.btn_clicked,
-                                  activeforeground = self.col_fg,
-                                  width = 20,
-                                  font = "Montserrat 12",
-                                  justify= 'left',
-                                  anchor = 'w',
-                                  bd = 0,
-                                  )
-        self.navBtn_Search.place(relx=0.3, rely=0.58, anchor='w')
 
         self.navBtn_Exit = Button(self.navFrame,
                                   text = 'Exit',

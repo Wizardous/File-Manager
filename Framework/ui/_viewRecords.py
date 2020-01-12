@@ -65,7 +65,7 @@ class ViewRecords(Frame):
 
         self.rec_list = Listbox(
             self.list_Frame,
-            height = 10,
+            height = 8,
             width = 37,
             font=("Montserrat", 15),
             bd = 0,
@@ -86,6 +86,38 @@ class ViewRecords(Frame):
 
         scrollBar.config(command=self.rec_list.yview)
         self.rec_list.config(yscrollcommand=scrollBar.set)
+
+        # ------------- Search Frame --------------------------------
+        self.search_Frame = Frame(
+            self._master,
+            height = 35,
+            width = self._master['width'] * 0.9,
+            bg = self.col_page_bg
+            # bg = 'cyan',
+        )
+        self.search_Frame.place(relx=0.5, rely=0.7, anchor='n')
+        self.frame_list.append(self.search_Frame)
+
+        search_Label = Label(
+            self.search_Frame,
+            text = "Search Keyword: ",
+            font = "Montserrat 11",
+            bg = self.col_page_bg,
+            fg = self.col_fg
+        )
+        search_Label.place(relx=0.29, rely=0.45, anchor='w')
+
+        self.search_String = StringVar()
+        search_Entry = Entry(
+            self.search_Frame,
+            bg=self.entry_bg,
+            fg=self.col_fg, bd=0,
+            width=18,
+            font="Montserrat 13",
+            justify='right',
+            textvariable=self.search_Frame
+        )
+        search_Entry.place(relx=0.58, rely=0.12, anchor='nw')
 
 
         # ------------- View Frame --------------------------------
@@ -122,7 +154,7 @@ class ViewRecords(Frame):
             activeforeground=self.col_fg,
             # command = showEntry,
         )
-        view_Btn.place(relx=0.8, rely=0.15, anchor='n')
+        view_Btn.place(relx=0.85, rely=0.15, anchor='n')
 
     def close(self):
         for frame in self.frame_list:
