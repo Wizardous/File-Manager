@@ -9,6 +9,7 @@ class UpdateRecords(Frame):
         self.col_bg = '#2b2b3d'
         self.col_fg = '#05ff7e'
         self.entry_bg = '#1e1e2b'
+        self.entry_fg_disabled = '#00e66f'
         self.col_btn_clicked = "#323247"
         self.col_btn_default = "#36364d"
 
@@ -111,10 +112,12 @@ class UpdateRecords(Frame):
             self.edit_Frame,
             bg=self.entry_bg,
             fg=self.col_fg, bd=0,
+            disabledbackground = self.entry_bg,
+            disabledforeground=self.entry_fg_disabled,
             width=27,
             font="Montserrat 15",
             justify='left',
-            state = 'disabled',
+            state = DISABLED,
             textvariable=self.username_String
         )
         self.username_Entry.place(relx=0.435+x, rely=0.12, anchor='n')
@@ -142,10 +145,12 @@ class UpdateRecords(Frame):
             self.edit_Frame,
             bg=self.entry_bg,
             fg=self.col_fg, bd=0,
+            disabledbackground=self.entry_bg,
+            disabledforeground=self.entry_fg_disabled,
             width=27,
             font="Montserrat 15",
             justify='left',
-            state='readonly',
+            state=DISABLED,
             textvariable=self.email_String
         )
         self.email_Entry.place(relx=0.435+x, rely=0.39, anchor='n')
@@ -183,10 +188,12 @@ class UpdateRecords(Frame):
             self.edit_Frame,
             bg=self.entry_bg,
             fg=self.col_fg, bd=0,
+            disabledbackground = self.entry_bg,
+            disabledforeground=self.entry_fg_disabled,
             width=13,
             font="Montserrat 15",
             justify='left',
-            state='readonly',
+            state=DISABLED,
             textvariable=self.password_String
         )
         self.password_Entry.place(relx=0.425+x, rely=0.64, anchor='ne')
@@ -196,19 +203,44 @@ class UpdateRecords(Frame):
             self.edit_Frame,
             bg=self.entry_bg,
             fg=self.col_fg, bd=0,
+            disabledbackground=self.entry_bg,
+            disabledforeground=self.entry_fg_disabled,
             width=13,
             font="Montserrat 15",
             justify='left',
-            state='readonly',
+            state=DISABLED,
             textvariable=self.confirm_String
         )
         self.confirm_Entry.place(relx=0.8+x, rely=0.64, anchor='ne')
 
-    def changeStatus(self):
-        self.username_Entry.config(
-            state = "normal" if self.username_check_Var else "disabled"
+        add_Btn = Button(
+            self.edit_Frame,
+            text="Update",
+            width=12,
+            bd=0,
+            font=("Montserrat", 14),
+            bg=self.col_btn_default,
+            fg=self.col_fg,
+            activebackground=self.col_btn_clicked,
+            activeforeground=self.col_fg,
+            # command = self.add_Event,
         )
+        add_Btn.place(relx=0.23, rely=0.8, anchor='n')
 
+        self.confirm_Label = Label(
+            self.edit_Frame,
+            text="",
+            font="Montserrat 11",
+            bg=self.col_page_bg,
+            fg="red"
+        )
+        self.confirm_Label.place(relx=0.5 + x, rely=0.85, anchor='n')
+
+    def changeStatus(self):
+        self.username_Entry.config(state = "normal" if self.username_check_Var.get() else "disabled")
+        self.email_Entry.config(state="normal" if self.email_check_Var.get() else "disabled")
+        self.password_Entry.config(state="normal" if self.password_check_Var.get() else "disabled")
+        self.confirm_Entry.config(state="normal" if self.password_check_Var.get() else "disabled")
 
     def close(self):
         for frame in self.frame_list:
