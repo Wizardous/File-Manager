@@ -1,0 +1,17 @@
+[
+    {
+        "username": "Abhijit",
+        "email": 2,
+        "pass": 3
+    },
+    {
+        "username": "Anurag",
+        "email": 5,
+        "pass": 6
+    },
+    {
+        "username": "Saheel",
+        "email": 8,
+        "pass": 10
+    }
+]

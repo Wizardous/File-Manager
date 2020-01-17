@@ -18,11 +18,47 @@ class AddRecords(Frame):
         self.col_selected_bg = "#2a2a3c"
         self.col_selected_fg = "#99ff99"
 
+        self.col_log_error = "#ffad33"
+        self.col_log_success = "#79ff4d"
+
         self.frame_list = []
         self.initFrame()
 
-    def initFrame(self):
+    def __validateUsername(self, username):
+        return True
 
+    def __validateEmail(self, email):
+        return True
+
+    def __validatePassword(self, password):
+        return True
+
+    def __editLogLine(self, mode, text):
+        if mode 
+
+    def addRecord(self):
+        username = self.userName_String.get()
+        email = self.email_String.get()
+        password = self.password_String.get()
+        confirm = self.confirm_String.get()
+
+        if password == confirm and len(password):
+            print(username, email, password, confirm)
+
+        elif not len(password):
+            self.error_Label['fg'] = self.col_log_error
+            self.error_Label['text'] = "Password field empty."
+        elif not len(password):
+            self.error_Label['fg'] = self.col_log_error
+            self.error_Label['text'] = "Confirm field empty."
+        elif password != confirm:
+            self.error_Label['fg'] = self.col_log_error
+            self.error_Label['text'] = "Password Confirmations did not matched."
+
+        self.password_String.set("")
+        self.confirm_String.set("")
+
+    def initFrame(self):
         # ------------- Title Frame --------------------------------
         self.title_Frame = Frame(
             self._master,
@@ -159,9 +195,19 @@ class AddRecords(Frame):
             fg=self.col_fg,
             activebackground=self.col_btn_clicked,
             activeforeground=self.col_fg,
-            # command = self.add_Event,
+            command = self.addRecord,
         )
-        add_Btn.place(relx=0.23, rely=0.8, anchor='n')
+        add_Btn.place(relx=0.23, rely=0.72, anchor='n')
+
+        self.error_Label = Label(
+            self.input_Frame,
+            text="",
+            anchor='w',
+            font=("Montserrat", 11),
+            bg=self.col_page_bg,
+            fg=self.col_log_success,
+        )
+        self.error_Label.place(relx=0.08, rely=0.9, anchor='nw')
 
     def close(self):
         for frame in self.frame_list:

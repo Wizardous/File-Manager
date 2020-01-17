@@ -1,5 +1,5 @@
 from tkinter import *
-from threading import Thread
+from Framework.api.records import Records
 
 class ViewRecords(Frame):
     def __init__(self, parent_frame):
@@ -19,15 +19,18 @@ class ViewRecords(Frame):
         self.col_selected_fg = "#99ff99"
 
         self.frame_list = []
-        self.records_count = 100
+        self.records_count = 0
         self.initFrame()
+        self.file_api = Records()
         self.__populate_list()
 
     def __populate_list(self):
-        for i in range(100):
-            record = ' Wizardous' + str(i)
-            self.rec_list.insert(END, record)
-        pass
+        status, self.records = self.file_api.readRecords()
+        self.records_count = len(self.records)
+        if status:
+            for r in self.records:
+                self.rec_list.insert(END, str(r[0]))
+        self.count_lbl.config(text=f"Total Records : {self.records_count}")
 
     def initFrame(self):
 
@@ -93,7 +96,6 @@ class ViewRecords(Frame):
             height = 35,
             width = self._master['width'] * 0.9,
             bg = self.col_page_bg
-            # bg = 'cyan',
         )
         self.search_Frame.place(relx=0.5, rely=0.7, anchor='n')
         self.frame_list.append(self.search_Frame)
@@ -144,7 +146,6 @@ class ViewRecords(Frame):
         view_Btn = Button(
             self.viewBtn_Frame,
             text = "View Selected",
-            # height = ,
             width = 12,
             bd = 0,
             font=("Montserrat", 14),
@@ -152,10 +153,89 @@ class ViewRecords(Frame):
             fg = self.col_fg,
             activebackground=self.col_btn_clicked,
             activeforeground=self.col_fg,
-            # command = showEntry,
+            command = self.viewSelected,
         )
         view_Btn.place(relx=0.85, rely=0.15, anchor='n')
+
+    def viewSelected(self):
+        curr_select = self.rec_list.curselection()[0]
+        ResultDialog(self.records[curr_select])
 
     def close(self):
         for frame in self.frame_list:
             frame.destroy()
+
+
+class ResultDialog():
+    def __init__(self, data):
+        self.dialog = Toplevel()
+        self.dialog.grab_set()
+
+        self.col_bg = '#2b2b3d'
+        self.col_fg = '#05ff7e'
+        self.col_btn_clicked = "#323247"
+        self.col_btn_default = "#36364d"
+
+        self.dialog.geometry('500x200+500+500')
+        self.dialog.config(bg = self.col_bg)
+
+        self.username = data[0]
+        self.email = data[1]
+        self.password = data[2]
+
+        self.initUI()
+
+    def initUI(self):
+        Label(
+            self.dialog,
+            text=self.username,
+            anchor='w',
+            font=("Montserrat", 20, 'bold'),
+            bg=self.col_bg,
+            fg=self.col_fg
+        ).place(relx=0.05, rely=0.05, anchor='nw')
+
+        Label(
+            self.dialog,
+            text=self.email,
+            anchor='w',
+            font=("Montserrat", 17),
+            bg=self.col_bg,
+            fg=self.col_fg
+        ).place(relx=0.05, rely=0.25, anchor='nw')
+
+        Label(
+            self.dialog,
+            text = self.password,
+            anchor="w",
+            font=("Montserrat", 11),
+            bg = self.col_bg,
+            fg = "#00b356"
+        ).place(relx=0.05, rely=0.45, anchor='nw')
+
+        Button(
+            self.dialog,
+            text="OK",
+            width=10,
+            bd=0,
+            font=("Montserrat", 14),
+            bg=self.col_btn_default,
+            fg=self.col_fg,
+            activebackground=self.col_btn_clicked,
+            activeforeground=self.col_fg,
+            command=self.ok_event,
+        ).place(relx=0.9, rely=0.7, anchor='ne')
+
+    def ok_event(self):
+        self.dialog.grab_release()
+        self.dialog.destroy()
+
+
+def main():
+    root = Tk()
+    root.geometry("300x300")
+    ResultDialog(data=("Wizardous", "abhijitgadge5599@gmail.com", "232324SDFSDF3423432DFDSFSDFs323dfDSFSDF421fsfsdfs"))
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()

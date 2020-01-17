@@ -1,9 +1,9 @@
 import json
 import os
 
-class records:
+class Records:
     def __init__(self):
-        self.file_path = "../Files/"
+        self.file_path = "./Files/"
         self.file_name = "records.json"
         try:
             if not os.path.exists(self.file_path+self.file_name):
@@ -112,9 +112,8 @@ class records:
             return False, e
 
 def main():
-    r = records()
+    r = Records()
     print(r.readRecords())
-
 
 if __name__ == "__main__":
     main()
