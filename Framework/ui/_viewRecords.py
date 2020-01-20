@@ -24,13 +24,32 @@ class ViewRecords(Frame):
         self.file_api = Records()
         self.__populate_list()
 
-    def __populate_list(self):
-        status, self.records = self.file_api.readRecords()
-        self.records_count = len(self.records)
-        if status:
+    def __populate_list(self, data=None):
+        #Empty List first
+        self.rec_list.delete(0, END)
+
+        if data or data==[]:
+            self.records = data
             for r in self.records:
-                self.rec_list.insert(END, str(r[0]))
-        self.count_lbl.config(text=f"Total Records : {self.records_count}")
+                self.rec_list.insert(END, str(r[1][0]))
+
+        elif not data:
+            status, self.records = self.file_api.readRecords()
+            self.records_count = len(self.records)
+            if status:
+                for r in self.records:
+                    self.rec_list.insert(END, str(r[0]))
+            self.count_lbl.config(text=f"Total Records : {self.records_count}")
+
+    def __searchTrace(self, *args):
+        search_key = self.search_String.get()
+        status, result = self.file_api.searchRecords(key=search_key, mode='username')
+        if status:
+            self.__populate_list(data = result)
+        elif result == 404:
+            self.__populate_list(data=[])
+        else:
+            self.__populate_list()
 
     def initFrame(self):
 
@@ -102,7 +121,7 @@ class ViewRecords(Frame):
 
         search_Label = Label(
             self.search_Frame,
-            text = "Search Keyword: ",
+            text = "Search Username: ",
             font = "Montserrat 11",
             bg = self.col_page_bg,
             fg = self.col_fg
@@ -110,14 +129,14 @@ class ViewRecords(Frame):
         search_Label.place(relx=0.29, rely=0.45, anchor='w')
 
         self.search_String = StringVar()
+        self.search_String.trace('w', self.__searchTrace)
         search_Entry = Entry(
             self.search_Frame,
             bg=self.entry_bg,
             fg=self.col_fg, bd=0,
             width=18,
             font="Montserrat 13",
-            justify='right',
-            textvariable=self.search_Frame
+            textvariable=self.search_String
         )
         search_Entry.place(relx=0.58, rely=0.12, anchor='nw')
 

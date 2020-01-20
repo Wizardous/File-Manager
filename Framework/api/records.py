@@ -20,10 +20,10 @@ class Records:
             with open(self.file_path+self.file_name, 'r') as file:
                 data = json.loads(file.read())
                 records_list = [tuple([v for v in r.values()]) for r in data]
-            return True, records_list
+            return (True, records_list)
 
         except Exception as e:
-            return False, e
+            return (False, e)
 
     def addRecord(self, new_data):
         try:
@@ -38,30 +38,35 @@ class Records:
             return False, e
 
     def searchRecords(self, key,mode='username'):
+        if key=="":
+            return False, -1
         try:
-            if key == "" or mode not in ('username', 'email'):
+            if mode not in ('username', 'email'):
                 raise KeyError
 
             if mode == 'username':
                 status, data = self.readRecords()
                 if status:
-                    results = [r for r in data if key == r[0]]
-                    return True, results
+                    results = [(i, r) for i, r in enumerate(data) if key in r[0]]
+                    if len(results):
+                        return (True, results)
+                    else:
+                        return (False, 404)
                 else:
                     raise LookupError
 
             elif mode == 'email':
                 status, data = self.readRecords()
                 if status:
-                    results = [r for r in data if key == r[1]]
-                    return True, results
+                    results = [(i, r) for i, r in enumerate(data) if key == r[1]]
+                    return (True, results)
                 else:
                     raise LookupError
 
         except LookupError:
-            return False, 404
+            return (False, 404)
         except Exception as  e:
-            return False, e
+            return (False, e)
 
     def deleteRecord(self, key, mode='username'):
         try:
@@ -114,6 +119,7 @@ class Records:
 def main():
     r = Records()
     print(r.readRecords())
+    print(r.searchRecords(key="Wizardous"))
 
 if __name__ == "__main__":
     main()
