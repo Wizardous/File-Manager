@@ -158,8 +158,11 @@ class ViewRecords(Frame):
         view_Btn.place(relx=0.85, rely=0.15, anchor='n')
 
     def viewSelected(self):
-        curr_select = self.rec_list.curselection()[0]
-        ResultDialog(self.records[curr_select])
+        try:
+            curr_select = self.rec_list.curselection()[0]
+            ResultDialog(self.records[curr_select])
+        except:
+            pass
 
     def close(self):
         for frame in self.frame_list:
@@ -204,9 +207,10 @@ class ResultDialog():
             fg=self.col_fg
         ).place(relx=0.05, rely=0.25, anchor='nw')
 
+        pass_string = self.password[:40] + "..."
         Label(
             self.dialog,
-            text = self.password,
+            text = pass_string,
             anchor="w",
             font=("Montserrat", 11),
             bg = self.col_bg,

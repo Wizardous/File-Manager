@@ -1,4 +1,15 @@
 from tkinter import *
+import re
+from Framework.api.records import Records
+from passlib.context import CryptContext
+
+def hashPassword(password):
+    pwd_context = CryptContext(
+        schemes=["pbkdf2_sha256"],
+        default="pbkdf2_sha256",
+        pbkdf2_sha256__default_rounds=30000
+    )
+    return pwd_context.hash(password)
 
 
 class AddRecords(Frame):
@@ -23,18 +34,59 @@ class AddRecords(Frame):
 
         self.frame_list = []
         self.initFrame()
+        self.file_api = Records()
 
     def __validateUsername(self, username):
-        return True
+        username_re = r"^[a-zA-Z0-9_.-]+$"
+        return True if re.match(username_re, username) else False
 
     def __validateEmail(self, email):
-        return True
+        email_re = r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        return True if re.match(email_re, email) else False
 
     def __validatePassword(self, password):
-        return True
+        charRegex = re.compile(r'(\w{8,})')  # Check if password has atleast 8 characters
+        lowerRegex = re.compile(r'[a-z]+')  # Check if at least one lowercase letter
+        upperRegex = re.compile(r'[A-Z]+')  # Check if atleast one upper case letter
+        digitRegex = re.compile(r'[0-9]+')  # Check if at least one digit.
+        result = charRegex.findall(password) != [] and \
+                 lowerRegex.findall(password) != [] and \
+                 upperRegex.findall(password) != [] and \
+                 digitRegex.findall(password) != []
+        return result
 
-    def __editLogLine(self, mode, text):
-        if mode 
+    def __alert(self, mode, text):
+        if mode == "ERROR":
+            self.error_Label['fg'] = self.col_log_error
+            self.error_Label['text'] = text
+
+        elif mode == "LOG":
+            self.error_Label['fg'] = self.col_log_success
+            self.error_Label['text'] = text
+
+        self.password_String.set("")
+        self.confirm_String.set("")
+
+    def __clearForm(self):
+        self.userName_String.set("")
+        self.email_String.set("")
+        self.password_String.set("")
+        self.confirm_String.set("")
+
+    def __validateForm(self, username, email, password):
+        if self.__validateUsername(username):
+            if self.__validateEmail(email):
+                if self.__validatePassword(password):
+                    return True
+                else:
+                    self.__alert(mode="ERROR", text="Password Invalid.")
+                    return False
+            else:
+                self.__alert(mode="ERROR", text="Email Invalid")
+                return False
+        else:
+            self.__alert(mode="ERROR", text="Username Invalid")
+            return False
 
     def addRecord(self):
         username = self.userName_String.get()
@@ -43,20 +95,18 @@ class AddRecords(Frame):
         confirm = self.confirm_String.get()
 
         if password == confirm and len(password):
-            print(username, email, password, confirm)
+            if self.__validateForm(username, email, password):
+                self.__alert(mode="LOG", text="Record Added Successfully!")
+                data = {"username": username, "email": email, "pass": hashPassword(password)}
+                self.file_api.addRecord(data)
+                self.__clearForm()
 
         elif not len(password):
-            self.error_Label['fg'] = self.col_log_error
-            self.error_Label['text'] = "Password field empty."
-        elif not len(password):
-            self.error_Label['fg'] = self.col_log_error
-            self.error_Label['text'] = "Confirm field empty."
+            self.__alert(mode="ERROR", text="Password Field Empty")
+        elif not len(confirm):
+            self.__alert(mode="ERROR", text="Confirm field empty.")
         elif password != confirm:
-            self.error_Label['fg'] = self.col_log_error
-            self.error_Label['text'] = "Password Confirmations did not matched."
-
-        self.password_String.set("")
-        self.confirm_String.set("")
+            self.__alert(mode="ERROR", text="Password Confirmations did not matched.")
 
     def initFrame(self):
         # ------------- Title Frame --------------------------------
