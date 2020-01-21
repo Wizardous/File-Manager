@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from time import sleep
 from threading import Thread
 
 from Framework.ui.navPage import Nav_Frame
@@ -26,6 +27,9 @@ class Login_form(Frame):
         self.entry_bg = '#1e1e2b'
         self.btn_clicked = "#323247"
         self.btn_default = "#36364d"
+
+        self.col_log_error = "#ffad33"
+        self.col_log_success = "#79ff4d"
 
         self._master.title("Login")
         self._master.geometry("{}x{}+{}+{}".format(self.width, self.height, x, y))
@@ -116,15 +120,13 @@ class Login_form(Frame):
                                     command = self.try_login)
         self.submit_button.place(relx=0.5, rely=0.50, anchor='n')
 
-        self.signUP_lbl = Label(self.login_frame,
-                                text = "New to this App | Sign up here",
+        self.errorLabel = Label(self.login_frame,
+                                text = "",
                                 justify = 'center',
                                 bg = self.col_bg,
-                                fg = self.col_fg
+                                fg = self.col_log_error
                                 )
-        self.signUP_lbl.place(relx=0.5, rely=0.95, anchor='s')
-
-        
+        self.errorLabel.place(relx=0.5, rely=0.95, anchor='s')
 
     def try_login(self):
         if not self.__auth_running:
@@ -137,13 +139,14 @@ class Login_form(Frame):
         result = self.__login_api.authenticate(self.username_string.get(),
                                                self.password_string.get())
         if result:
-            print("success")
-            self.close_ui()
+            self.close()
             handle.navigation_page = Nav_Frame(self._master)
         else :
-            print("Failed")
+            self.errorLabel['text'] = "LogIn Failed, Try again!"
+            sleep(5)
+            self.errorLabel['text'] = ""
 
-    def close_ui(self):
+    def close(self):
         for frame in self.frame_List:
             frame.destroy()
 
