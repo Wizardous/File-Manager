@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11f32bfe-419f-471b-8a28-08de5d1103ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Framework/api/Files/records.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/ui/Files/records.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/records.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/records.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/api/records.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/api/records.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Framework/ui/_viewRecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/ui/_viewRecords.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/ui/_updateRecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/ui/_updateRecords.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Framework/ui/navPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Framework/ui/navPage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,22 +184,22 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1515" height="191" key="GridCell.Tab.0.bottom" timestamp="1579553136556">
+    <state width="1515" height="116" key="GridCell.Tab.0.bottom" timestamp="1579636203586">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579553136556" />
-    <state width="1515" height="191" key="GridCell.Tab.0.center" timestamp="1579553136556">
+    <state width="1515" height="116" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579636203586" />
+    <state width="1515" height="116" key="GridCell.Tab.0.center" timestamp="1579636203586">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579553136556" />
-    <state width="1515" height="191" key="GridCell.Tab.0.left" timestamp="1579553136555">
+    <state width="1515" height="116" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579636203586" />
+    <state width="1515" height="116" key="GridCell.Tab.0.left" timestamp="1579636203586">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579553136555" />
-    <state width="1515" height="191" key="GridCell.Tab.0.right" timestamp="1579553136556">
+    <state width="1515" height="116" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579636203586" />
+    <state width="1515" height="116" key="GridCell.Tab.0.right" timestamp="1579636203586">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579553136556" />
+    <state width="1515" height="116" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579636203586" />
     <state width="1515" height="2" key="GridCell.Tab.1.bottom" timestamp="1579276583148">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
