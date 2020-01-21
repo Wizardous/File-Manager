@@ -237,7 +237,6 @@ class AddRecords(Frame):
         add_Btn = Button(
             self.input_Frame,
             text="Add",
-            # height = ,
             width=12,
             bd=0,
             font=("Montserrat", 14),

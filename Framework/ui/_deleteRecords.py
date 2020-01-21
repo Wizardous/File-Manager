@@ -1,5 +1,6 @@
 from tkinter import *
 
+from Framework.api.records import Records
 
 class DeleteRecords(Frame):
     def __init__(self, parent_frame):
@@ -18,8 +19,47 @@ class DeleteRecords(Frame):
         self.col_selected_bg = "#2a2a3c"
         self.col_selected_fg = "#99ff99"
 
+        self.col_log_error = "#ffad33"
+        self.col_log_success = "#79ff4d"
+
         self.frame_list = []
+        self.file_api = Records()
         self.initFrame()
+
+    def __validateUsername(self, username):
+        username_re = r"^[a-zA-Z0-9_.-]+$"
+        return True if re.match(username_re, username) else False
+
+    def __validateEmail(self, email):
+        email_re = r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        return True if re.match(email_re, email) else False
+
+    def __alert(self, mode, text):
+        if mode == "ERROR":
+            self.error_Label['fg'] = self.col_log_error
+            self.error_Label['text'] = text
+
+        elif mode == "LOG":
+            self.error_Label['fg'] = self.col_log_success
+            self.error_Label['text'] = text
+
+    def deleteRecord(self):
+        keyword = self.field_String.get()
+        if self.radio_Var.get() == 'Username':
+            if not self.__validateUsername(keyword):
+                self.__alert('ERROR', "Invalid Username!")
+                return
+        elif self.radio_Var.get() == 'Email':
+            if not self.__validateEmail(keyword):
+                self.__alert('ERROR', "Invalid Email!")
+                return
+
+        status, result = self.file_api.deleteRecord(key=keyword, mode=self.radio_Var.get())
+        if status:
+            self.__alert("LOG", result)
+            self.field_String.set("")
+        elif result == 404:
+            self.__alert("ERROR", f"{self.radio_Var.get()} not found!")
 
     def initFrame(self):
         # ------------- Title Frame --------------------------------
@@ -109,7 +149,6 @@ class DeleteRecords(Frame):
             fg=self.col_fg,
         )
         fieldName_Label.place(relx=0.03, rely=0.33, anchor='w')
-        self.changeLabel()
 
         self.field_String = StringVar()
         self.field_Entry = Entry(
@@ -133,12 +172,24 @@ class DeleteRecords(Frame):
             fg=self.col_fg,
             activebackground=self.col_btn_clicked,
             activeforeground=self.col_fg,
-            # command = self.delete_Event,
+            command = self.deleteRecord,
         )
-        delete_Btn.place(relx=0.05, rely=0.65, anchor='w')
+        delete_Btn.place(relx=0.05, rely=0.7, anchor='w')
+
+        self.error_Label = Label(
+            self.input_Frame,
+            text="",
+            anchor='w',
+            font=("Montserrat", 11),
+            bg=self.col_page_bg,
+            fg=self.col_log_success,
+        )
+        self.error_Label.place(relx=0.04, rely=0.48, anchor='nw')
+        self.changeLabel()
 
     def changeLabel(self):
         self.fieldVar.set(f"Enter the {self.radio_Var.get()} :")
+        self.error_Label.config(text = "")
 
     def close(self):
         for frame in self.frame_list:

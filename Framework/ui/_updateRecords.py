@@ -33,7 +33,7 @@ class UpdateRecords(Frame):
 
         self.frame_list = []
         self.file_api = Records()
-        self.current_record = None
+        self.current_record = ["", "", ""]
 
         self.initFrame()
 
@@ -180,7 +180,7 @@ class UpdateRecords(Frame):
 
         search_Label = Label(
             self.search_Frame,
-            text = "Search Keyword: ",
+            text = "Search Username : ",
             font = "Montserrat 11",
             bg = self.col_page_bg,
             fg = self.col_fg
@@ -315,6 +315,7 @@ class UpdateRecords(Frame):
             width=13,
             font="Montserrat 15",
             justify='left',
+            show="\u2022",
             state=DISABLED,
             textvariable=self.password_String
         )
@@ -330,6 +331,7 @@ class UpdateRecords(Frame):
             width=13,
             font="Montserrat 15",
             justify='left',
+            show="\u2022",
             state=DISABLED,
             textvariable=self.confirm_String
         )

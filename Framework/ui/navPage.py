@@ -1,8 +1,4 @@
 from tkinter import *
-from threading import Thread
-
-from Framework.api.records import *
-
 from Framework.ui._viewRecords import ViewRecords
 from Framework.ui._addRecords import AddRecords
 from Framework.ui._updateRecords import UpdateRecords
@@ -44,15 +40,15 @@ class Nav_Frame(Frame):
         self.initUI()
 
         self.current_page = ViewRecords(self.pageFrame)
-        self.change_page(UpdateRecords)
+        self.change_page(ViewRecords)
 
     def change_page(self, class_name):
         if class_name.__name__ != type(self.current_page).__name__:
             self.current_page.close()
             del self.current_page
             self.current_page = class_name(self.pageFrame)
-
             current_class = class_name.__name__
+            self._master.title('NavPage - '+current_class)
             for c in self.button_dict:
                 if c != current_class:
                     self.button_dict[c]['bg'] = self.col_tab_default_bg

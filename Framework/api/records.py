@@ -69,6 +69,7 @@ class Records:
             return (False, e)
 
     def deleteRecord(self, key, mode='username'):
+        mode = mode.lower()
         try:
             if key == "" or mode not in ('username', 'email'):
                 raise KeyError
