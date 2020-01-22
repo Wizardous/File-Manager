@@ -35,10 +35,11 @@ class ViewRecords(Frame):
 
         elif not data:
             status, self.records = self.file_api.readRecords()
+            self.records = tuple(enumerate(self.records))
             self.records_count = len(self.records)
             if status:
                 for r in self.records:
-                    self.rec_list.insert(END, str(r[0]))
+                    self.rec_list.insert(END, str(r[1][0]))
             self.count_lbl.config(text=f"Total Records : {self.records_count}")
 
     def __searchTrace(self, *args):
@@ -192,7 +193,7 @@ class ResultDialog():
     def __init__(self, data):
         self.dialog = Toplevel()
         self.dialog.grab_set()
-
+        print(data)
         self.col_bg = '#2b2b3d'
         self.col_fg = '#05ff7e'
         self.col_btn_clicked = "#323247"
@@ -201,9 +202,10 @@ class ResultDialog():
         self.dialog.geometry('500x200+500+500')
         self.dialog.config(bg = self.col_bg)
 
-        self.username = data[0]
-        self.email = data[1]
-        self.password = data[2]
+        self.username = data[1][0]
+        self.email = data[1][1]
+        self.password = data[1][2]
+        print(data, self.username, self.email, self.password, sep="\n")
 
         self.initUI()
 
@@ -257,7 +259,7 @@ class ResultDialog():
 def main():
     root = Tk()
     root.geometry("300x300")
-    ResultDialog(data=("Wizardous", "abhijitgadge5599@gmail.com", "232324SDFSDF3423432DFDSFSDFs323dfDSFSDF421fsfsdfs"))
+    ResultDialog(data=("Wizardous", "abhijitgadge5599@gmail.com", "23aADFEfsfsdfs"))
     root.mainloop()
 
 if __name__ == "__main__":
