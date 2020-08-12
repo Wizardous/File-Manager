@@ -3,7 +3,8 @@ import requests as req
 class Login:
 
     def __init__(self):
-        self.__api_url = 'https://sam123.pythonanywhere.com/examfiles/login/authenticate/'
+        #Turned off for skipping extra latency
+        # self.__api_url = 'https://sam123.pythonanywhere.com/examfiles/login/authenticate/'
         self.__session1 = req.Session()
 
     def __get_request(self):
@@ -11,7 +12,11 @@ class Login:
         return response.json()
 
     def authenticate(self, username, password):
-        response = self.__get_request()
+        #Skipping the online Auth temporally
+        # response = self.__get_request()
+        response = dict()
+        response['email'] = "admin@gmail.com"
+        response['pass'] = "123456"
         if response['email'] == username and response['pass'] == password:
             return True
         else:
