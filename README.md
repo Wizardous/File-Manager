@@ -12,20 +12,20 @@ Passlib module is used to encrypt the password field in each entry. This is also
 Here are some previews of the GUI implemented.
 
 **Login**
-![Login Window](/Screenshots/Login.png)
+![Window](/Screenshots/Login.png)
 
 **View**
-![Login Window](/Screenshots/View.png)
-![Login Window](/Screenshots/View_2.png)
+![Window](/Screenshots/View.png)
+![Window](/Screenshots/View_2.png)
 
 **Add**
-![Login Window](/Screenshots/Add.png)
+![Window](/Screenshots/Add.png)
 
 **Update**
-![Login Window](/Screenshots/Update.png)
+![Window](/Screenshots/Update.png)
 
 **Delete**
-![Login Window](/Screenshots/Delete.png)
+![Window](/Screenshots/Delete.png)
 
 **Exit**
-![Login Window](/Screenshots/Exit.png)
+![Window](/Screenshots/Exit.png)
